@@ -54,22 +54,33 @@ END; //
 DELIMITER ;
 CALL PROC1('MAN','AMAN');
 CALL PROC1('DAC','CDAC');
-CREATE TABLE TEMPPPP (FIR CHAR(5),SEC VARCHAR(50));
+CREATE TABLE TEMPPPP (FIR INT(5),SEC VARCHAR(50));
 SELECT * FROM TEMPPPP;
 DROP PROCEDURE PROC1;
 
 -------------------------------------------------------------------
+-----------------------------------------------------------------------
 /*2. Create a stored function by the name of FUNC1 to take three parameters, the 
 sides of a triangle. The function should return a Boolean value:- TRUE if the 
 triangle is valid, FALSE otherwise. A triangle is valid if the length of each side is 
 less than the sum of the lengths of the other two sides. Check if the dimensions 
 entered can form a valid triangle. Calling program for the stored function need not 
 be written*/
-   DELIMITER;//
+------------------------------------------------------------------------
+  DELIMITER //
    CREATE FUNCTION FUNC1(A INT,B INT,C INT)
     RETURNS BOOLEAN 
     BEGIN
-		IF NOT ((A+B)>=C) AND ((B+C)>=A) AND ((C+A)>=B)
+		DECLARE A INT DEFAULT 0;
+		IF ((A+B)>=C) AND ((B+C)>=A) AND ((C+A)>=B);
+        THEN 
+       RETURN TRUE
+        ELSE
+       RETURN FALSE;
+       END IF;
+	END ;//
+    DELIMITER ;
+CALL FUNC1(10,20,30);
     
     
 
